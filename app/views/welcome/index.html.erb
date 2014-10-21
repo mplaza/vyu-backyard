@@ -1,0 +1,6 @@
+<h1> Dubai : <%= @dubai_local %> </h1>
+
+<h1> Admin Tools </h1>
+<% @tools.each do |t| %>
+<%= link_to t.name, t.link %>
+<% end %>

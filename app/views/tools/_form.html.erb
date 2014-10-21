@@ -1,0 +1,6 @@
+<%= bootstrap_form_for @tool do |f| %>
+	<%= f.text_field :name %>
+	<%= f.text_field :link %>
+	<%= f.text_area :description %>
+	<%= f.submit class: "btn-block btn-warning" %>
+<% end %>
