@@ -16,7 +16,12 @@ gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'figaro'
 
+gem 'google-api-client'
+gem 'httparty'
+
 gem 'tzinfo'
+
+gem 'angularjs-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

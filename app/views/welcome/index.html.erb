@@ -1,6 +1,17 @@
-<h1> Dubai : <%= @dubai_local %> </h1>
+<div ng-app="BackyardApp" class="container">
 
-<h1> Admin Tools </h1>
-<% @tools.each do |t| %>
-<%= link_to t.name, t.link %>
-<% end %>
+
+  <div ng-controller="Main-Ctrl">
+
+  <div>{{citytimezones[0].city}}: {{dubai_time}} on {{dubai_date}}</div>
+  <div>{{citytimezones[1].city}}: {{amman_time}} on {{amman_date}}</div>
+  <div>{{citytimezones[2].city}}: {{london_time}} on {{london_date}}</div>
+  <div>{{citytimezones[3].city}}: {{la_time}} on {{la_date}}</div>
+
+
+<!-- <h1> Admin Tools </h1>
+<#% @tools.each do |t| %>
+<#%= link_to t.name, t.link %>
+<#% end %> -->
+	</div>
+</div>

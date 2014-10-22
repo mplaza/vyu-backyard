@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+cities = Citytimezone.create([{city: 'Dubai'}, {city: 'Amman'}, {city: 'London'}, {city: 'Los Angeles'},])
