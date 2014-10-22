@@ -50,6 +50,23 @@ app.controller('Main-Ctrl', [ '$rootScope', '$scope', '$timeout', '$http', 'City
 	    var amman_am = 'AM';
 	    var london_am = 'AM';
 	    var la_am = 'AM';
+	    if ($scope.dubai_hrs == 0){
+	    	$scope.dubai_hrs = 12;
+	    	dubai_am = 'AM'
+	    }
+	    if ($scope.amman_hrs == 0){
+	    	$scope.amman_hrs = 12;
+	    	amman_am = 'AM'
+	    }
+	    if ($scope.london_hrs == 0){
+	    	$scope.london_hrs = 12;
+	    	london_am = 'AM'
+	    }
+	    if ($scope.la_hrs == 0){
+	    	$scope.la_hrs = 12;
+	    	la_am = 'AM'
+	    }
+	    	
 	    if ($scope.dubai_hrs > 12){
 	    	$scope.dubai_hrs = $scope.dubai_hrs % 12;
 	    	dubai_am = 'PM'
