@@ -104,7 +104,8 @@ class User
         },
         headers: {'Content-Type' => 'application/json'}
         )
-      if Bulletin.where(threads: t.id).to_a.length == 0
+      puts @message_snippets.body
+      if Bulletin.where(thread_id: t.id).to_a.length == 0
         Bulletin.create!(thread_id: t.id, message_snippets: JSON.parse(@message_snippets.body))
       end
     end
