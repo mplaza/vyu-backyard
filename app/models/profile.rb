@@ -6,4 +6,5 @@ class Profile
   field :contact_info, type: String
   field :email, type: String
   field :profile_picture, type: String
+  field :job_title, type: String
 end

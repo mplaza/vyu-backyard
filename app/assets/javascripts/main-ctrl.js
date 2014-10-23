@@ -1,10 +1,18 @@
-app.controller('Main-Ctrl', [ '$rootScope', '$scope', '$timeout', '$http', 'Citytimezone',
-  function($rootScope, $scope, $timeout, $http, Citytimezone){
+app.controller('Main-Ctrl', [ '$rootScope', '$scope', '$timeout', '$http', 'Citytimezone', 'Profile', 'Tool',
+  function($rootScope, $scope, $timeout, $http, Citytimezone, Profile, Tool){
 
   	Citytimezone.query(function(citytimezones) {
       $scope.citytimezones = citytimezones;
       getTimes();
       tick();
+    });
+
+    Profile.query(function(profiles) {
+      $scope.profiles = profiles;
+    });
+
+    Tool.query(function(tools) {
+      $scope.tools = tools;
     });
 
   	$scope.tickInterval = 60000;

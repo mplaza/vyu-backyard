@@ -13,3 +13,83 @@
  */
 
 @import "bootstrap";
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+.bottom-buffer{
+	margin-bottom: 4vw;
+	@media (max-width: 768px)
+	 {
+	 	margin-bottom: 6vw;
+	 }
+}
+
+.vyu-blue{
+	background-color: #018BBC;
+}
+
+.vyu-charcoal-text{
+	color: #333333;
+}
+
+.white-text{
+	color: white;
+}
+.navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus {
+    background-color: #333333;
+    color: white;
+}
+
+.navbar .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar .navbar-nav > li {
+    color: white;
+}
+
+#hipster-desk-background{
+	background-image: url('/assets/hipster_desk.jpg') ;
+	background-size: cover;
+	min-width: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -2;
+}
+
+#vyu-logo{
+	background-image: url('/assets/vyutvlogo.jpg');
+	width: 150px;
+	background-size: cover;
+}
+
+.blue-box-background{
+	background-color: rgba(0, 144, 186, .2);
+	border-radius: 10px;
+	padding-bottom: 10px;
+}
+
+.charcoal-box-background{
+	background-color: rgba(51, 51, 51, .2);
+	border-radius: 10px;
+	padding-bottom: 10px
+}
+
+.white-box-background{
+	background-color: rgba(253, 236, 225, .3);
+	border-radius: 10px;
+	padding-bottom: 10px
+}
+

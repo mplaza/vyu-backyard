@@ -17,3 +17,15 @@ app.factory('Citytimezone', ['$resource', function($resource) {
      {},
      {update: { method: 'PATCH'}});
 }]);
+
+app.factory('Profile', ['$resource', function($resource) {
+  return $resource('/profiles',
+     {},
+     {update: { method: 'PATCH'}});
+}]);
+
+app.factory('Tool', ['$resource', function($resource) {
+  return $resource('/tools',
+     {},
+     {update: { method: 'PATCH'}});
+}]);

@@ -68,12 +68,46 @@ class User
 
             # searching messages based on number of queries:
             # https://developers.google.com/gmail/api/guides/filtering
-            q: "from:" + 'venmo@venmo.com'
+            q: "is:unread"
         },
         headers: {'Content-Type' => 'application/json'}
         )
-    puts @emails.data.messages
+    @emails.data.messages.count
 
+  end
+
+  def query_email_for_bulletin
+    self.refresh_google_access_token if self.google_token_expires.past?
+    @google_api_client = Google::APIClient.new(
+      :application_name => 'Vyu Backyard',
+      :application_version => '1.0.0')
+    @google_api_client.authorization.access_token = self.google_access_token
+    @gmail = @google_api_client.discovered_api('gmail', "v1")
+    @threads = @google_api_client.execute(
+        api_method: @gmail.users.threads.list,
+        parameters: {
+            userId: "me",
+            # searching messages based on number of queries:
+            # https://developers.google.com/gmail/api/guides/filtering
+            q: "to:vyu-all@vyutv.com"
+        },
+        headers: {'Content-Type' => 'application/json'}
+        )
+    @threads.data.threads.each do |t|
+      @message_snippets = @google_api_client.execute(
+        api_method: @gmail.users.threads.get,
+        parameters: {
+            userId: "me",
+            id: t.id,
+            fields: 'messages/snippet',
+            q: "to:vyu-all@vyutv.com"
+        },
+        headers: {'Content-Type' => 'application/json'}
+        )
+      if Bulletin.where(threads: t.id).to_a.length == 0
+        Bulletin.create!(thread_id: t.id, message_snippets: JSON.parse(@message_snippets.body))
+      end
+    end
   end
 
   def refresh_google_access_token
