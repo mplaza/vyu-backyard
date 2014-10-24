@@ -11,6 +11,10 @@ app.controller('Main-Ctrl', [ '$rootScope', '$scope', '$timeout', '$http', 'City
       $scope.profiles = profiles;
     });
 
+    $scope.getId = function(profile){
+    	return profile._id.$oid;
+    }
+
     Tool.query(function(tools) {
       $scope.tools = tools;
     });

@@ -7,4 +7,5 @@ class Profile
   field :email, type: String
   field :profile_picture, type: String
   field :job_title, type: String
+  field :description, type: String
 end

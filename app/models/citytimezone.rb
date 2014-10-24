@@ -22,7 +22,7 @@ class Citytimezone
 	@la_timezone.update_attribute(:time, @la_local)
 
 	@london = TZInfo::Timezone.get("Europe/London")
-	@london_local = @la.utc_to_local(Time.now.utc)
+	@london_local = @london.utc_to_local(Time.now.utc)
 	@london_timezone = Citytimezone.where(city: 'London').first
 	@london_timezone.update_attribute(:time, @london_local)
 

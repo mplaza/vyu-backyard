@@ -99,14 +99,13 @@ class User
         parameters: {
             userId: "me",
             id: t.id,
-            fields: 'messages/snippet',
+            fields: 'messages(payload,snippet) ',
             q: "to:vyu-all@vyutv.com"
         },
         headers: {'Content-Type' => 'application/json'}
         )
-      puts @message_snippets.body
       if Bulletin.where(thread_id: t.id).to_a.length == 0
-        Bulletin.create!(thread_id: t.id, message_snippets: JSON.parse(@message_snippets.body))
+        Bulletin.create!(thread_id: t.id, message_snippets: JSON.parse(@message_snippets.body), subject: JSON.parse(@message_snippets.body)['messages'][0]['payload']['headers'].select{|v| v["name"] == "Subject" }[0])
       end
     end
   end

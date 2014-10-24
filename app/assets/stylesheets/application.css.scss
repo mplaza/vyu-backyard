@@ -13,10 +13,12 @@
  */
 
 @import "bootstrap";
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
 
 body {
     width: 100%;
     height: 100%;
+    font-family: 'PT Sans', sans-serif;
 }
 
 html {
@@ -36,12 +38,29 @@ html {
 	background-color: #018BBC;
 }
 
-.vyu-charcoal-text{
+.charcoal-text{
 	color: #333333;
+}
+
+a:link{
+	color: #2B9FC5;
+}
+
+a:visited{
+	color: #2B9FC5;
+}
+
+a:hover{
+	color: #018BBC;
+	text-decoration: none;
 }
 
 .white-text{
 	color: white;
+}
+
+.blue-text{
+	color: #018BBC;
 }
 .navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus {
     background-color: #333333;
@@ -76,19 +95,21 @@ html {
 }
 
 .blue-box-background{
-	background-color: rgba(0, 144, 186, .2);
+	background-color: rgba(0, 144, 186, .8);
 	border-radius: 10px;
 	padding-bottom: 10px;
 }
 
 .charcoal-box-background{
-	background-color: rgba(51, 51, 51, .2);
+	background-color: rgba(51, 51, 51, .8);
 	border-radius: 10px;
-	padding-bottom: 10px
+	padding-bottom: 10px;
+	max-height: 300px;
+	overflow: scroll;
 }
 
 .white-box-background{
-	background-color: rgba(253, 236, 225, .3);
+	background-color: rgba(253, 236, 225, .8);
 	border-radius: 10px;
 	padding-bottom: 10px
 }
