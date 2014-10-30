@@ -11,6 +11,9 @@ gem 'bootstrap_form'
 
 gem 'mongoid', github: 'mongoid/mongoid'
 
+gem "therubyracer", :platform => :ruby
+gem 'passenger'
+gem 'capistrano'
 
 gem 'devise' 
 gem 'omniauth-google-oauth2'

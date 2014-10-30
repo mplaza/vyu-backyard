@@ -27,10 +27,10 @@ html {
 }
 
 .bottom-buffer{
-	margin-bottom: 4vw;
+	margin-bottom: 2vw;
 	@media (max-width: 768px)
 	 {
-	 	margin-bottom: 6vw;
+	 	margin-bottom: 3vw;
 	 }
 }
 
@@ -111,6 +111,13 @@ a:hover{
 .white-box-background{
 	background-color: rgba(253, 236, 225, .8);
 	border-radius: 10px;
-	padding-bottom: 10px
+	padding-bottom: 10px;
+	height: 150px;
+	overflow: scroll;
+}
+
+#bulletin-board{
+	height: 400px;
+	overflow: scroll;
 }
 

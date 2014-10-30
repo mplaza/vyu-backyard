@@ -32,7 +32,7 @@ class User
 
   has_one :profile
 
-  # validates_format_of :email, with: /\@vyutv.com/
+  validates_format_of :email, with: /\@vyutv.com/
 
 
   def self.find_for_google_oauth2(access_token)
@@ -46,7 +46,8 @@ class User
       # @profile = Profile.new(:email => data.email, :name => data.name, :profile_picture => data.image)
       # if @user.save
         user = User.create!(:google_token_expires => Time.at(access_token.credentials.expires_at), :google_access_token => access_token.credentials.token, :google_refresh_token => access_token.credentials.refresh_token, :email => data.email, :password => Devise.friendly_token[0,20])
-        Profile.create(:email => data.email, name: data.name, :profile_picture => data.image, :user_id => user.id)
+        profile = Profile.create!(:email => data.email, name: data.name, :profile_picture => data.image, :user_id => user.id)
+        User.where(email: profile.email).to_a[0].get_location_from_calendar
         # profile = Profile.create!(:email => data.email, :name => data.name, :profile_picture => data.image)
 
       # end
@@ -107,6 +108,40 @@ class User
       if Bulletin.where(thread_id: t.id).to_a.length == 0
         Bulletin.create!(thread_id: t.id, message_snippets: JSON.parse(@message_snippets.body), subject: JSON.parse(@message_snippets.body)['messages'][0]['payload']['headers'].select{|v| v["name"] == "Subject" }[0])
       end
+    end
+  end
+
+  def get_events_from_calendar
+    self.refresh_google_access_token if self.google_token_expires.past?
+    @google_api_client = Google::APIClient.new(
+      :application_name => 'Vyu Backyard',
+      :application_version => '1.0.0')
+    @google_api_client.authorization.access_token = self.google_access_token
+    @calendar = @google_api_client.discovered_api('calendar', "v3")
+    @result = @google_api_client.execute(:api_method => @calendar.events.list, 
+      :parameters => {'calendarId' => 'primary', :singleEvents => true,
+      :timeMin => DateTime.now}, 
+            )
+    @events = JSON.parse(@result.body)['items']
+  end
+
+  def get_location_from_calendar
+    self.refresh_google_access_token if self.google_token_expires.past?
+    @google_api_client = Google::APIClient.new(
+      :application_name => 'Vyu Backyard',
+      :application_version => '1.0.0')
+    @google_api_client.authorization.access_token = self.google_access_token
+    @calendar = @google_api_client.discovered_api('calendar', "v3")
+    @result = @google_api_client.execute(:api_method => @calendar.calendars.get,
+          parameters: {
+            'calendarId' => 'primary'
+            }
+            )
+    if @result.body
+      @location = JSON.parse(@result.body)['timeZone'].split("/")[1].split("_").join(" ")
+    end
+    if @location
+      self.profile.update_attribute(:location, @location)
     end
   end
 

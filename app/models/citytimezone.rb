@@ -3,7 +3,7 @@ require 'tzinfo'
 class Citytimezone
   include Mongoid::Document
   field :city, type: String
-  field :time, type: String
+  field :time, type: Date
 
   def self.retrieve_times
   	@dubai = TZInfo::Timezone.get("Asia/Dubai")

@@ -1,61 +1,70 @@
-<div ng-app="BackyardApp">
-  <div ng-controller="Main-Ctrl">
+<!-- <div ng-app="BackyardApp">
+  <div ng-controller="Main-Ctrl"> -->
   <div id="hipster-desk-background"></div>
   	<div class="container-fluid">
 	  <div class="row-fluid bottom-buffer">
-		  <div class="col-md-4 white-box-background charcoal-text">
-		  	<h2 class="text-center">My Stuff</h2>
-		  	<div><a href="https://mail.google.com/mail/u/0/#search/is%3Aunread"><%= @num_unread_email %> </a>unread emails</div>
-		  	<div>Google Calendar</div>
-		  </div>
-		  <div class="col-md-1"></div>
-		  <div class="col-md-7 white-box-background charcoal-text">
-			  <h2 class="text-center">Toolbox</h2>
-		  		<input ng-model="searchTool" type="text" class="form-control" placeholder="search tools">
-				<div ng-repeat="tool in tools | filter: searchTool">
-		<!-- 		  	<div class= "col-md-3">
-				  		<img src="{{profile.profile_picture}}" height= '150px'></img>
-				  	</div> -->
+		  <div class="col-md-5">
+			  <div class="row-fluid">
+				  <div class="col-md-12 white-box-background charcoal-text bottom-buffer">
+				  	<h2 class="text-center">My Stuff</h2>
+				  	<div><a href="https://mail.google.com/mail/u/0/#search/is%3Aunread"><%= @num_unread_email %> </a>unread emails</div>
+				  	<h4 class="text-center">Upcoming Events </h4>
+				  	<div><% @events.each do |e| %>
+				  		<%= link_to e['summary'], e['htmlLink'] %>: <%= e['start']['dateTime'] %>
+				  		<% end %>
+				  	</div>
+				  </div>
+			  </div>
+			  <div class="row-fluid">
+				  <div class="col-md-12 white-box-background charcoal-text bottom-buffer">
+		  			<h2 class="text-center">People</h2>
+					<div ng-repeat="profile in profiles | filter: searchTerm">
+					  	<div class="col-md-12 h4"><a href= "/profiles/{{getId(profile)}}">{{profile.name}} </a>-- {{profile.job_title}}, {{profile.location}}</div>
+				  	</div>
+				  </div>
+		  	  </div>
+		  	  <div class="row-fluid">
+				  <div class="col-md-12 white-box-background charcoal-text bottom-buffer">
+		  			<h2 class="text-center">Tools</h2>
+					<div ng-repeat="tool in tools | filter: searchTerm">
 				  	<div class="col-md-12 h4">
 				  		<a href="{{tool.link}}">{{tool.name}}</a>
 				  		</div>
 			  	</div>
-		  	</div>
-		  	<div class="clearfix"></div>
-		</div>
-	</div>
-	<div class="container-fluid">
-	  	<div class="row-fluid bottom-buffer">
-	  		<div class="col-md-7 white-box-background charcoal-text">
-	  			<h2 class="text-center">Peepz</h2>
-		  	  	<input ng-model="searchProfile" type="text" class="form-control" placeholder="search profiles">
-				<div ng-repeat="profile in profiles | filter: searchProfile">
-				  	<div class="col-md-12 h4"><a href= "/profiles/{{getId(profile)}}">{{profile.name}} </a>-- {{profile.job_title}}, {{profile.location}}</div>
-			  	</div>
-		  	</div>
-		  	<div class="col-md-1"></div>
-		  	<div class="col-md-4 white-box-background charcoal-text">
-		  		<h2 class="text-center">Times</h2>
-		  		<div>{{citytimezones[0].city}}: {{dubai_date}} {{dubai_time}} </div>
-		  		<div>{{citytimezones[1].city}}: {{amman_date}} {{amman_time}}</div>
-	  			<div>{{citytimezones[2].city}}: {{london_date}} {{london_time}} </div>
-	  			<div>{{citytimezones[3].city}}: {{la_date}} {{la_time}} </div>
-		  	</div>
-		  	<div class="clearfix"></div>
-	  	</div>
-	</div>
-	<div class="container-fluid">
-	  	<div class="row-fluid bottom-buffer">
+				  </div>
+		  	  </div>
+		  </div>
+	<!-- 	  <div class="col-md-1"></div> -->
+		  <div class="col-md-7">
+		  <div class="row-fluid">
 		  	<div class="col-md-12 white-box-background charcoal-text">
-		  	<h2 class="text-center">Bulletin Board</h2>
-			<div><% @threads.each do |b| %>
-				<h5> <a href='https://mail.google.com/mail/u/0/#search/vyu-all%40vyutv.com/<%= b.thread_id %>'><%= b.subject['value'] %></a> </h5>
-				<% b.message_snippets['messages'].each do |m| %>
-					<p> -- <%= m['snippet'] %>...</p>
+		  		<div class="col-md-2"><h5>{{citytimezones[0].city}}</h5> {{dubai_date}} {{dubai_time}} </div>
+		  		<div class="col-md-2"><h5>{{citytimezones[1].city}}</h5> {{amman_date}} {{amman_time}}</div>
+	  			<div class="col-md-2"><h5>{{citytimezones[2].city}}</h5> {{london_date}} {{london_time}} </div>
+	  			<div class="col-md-2"><h5>{{citytimezones[3].city}}</h5> {{la_date}} {{la_time}} </div>
+			</div>
+			  <div id="bulletin-board" class="col-md-12 white-box-background charcoal-text">
+			  	<h2 class="text-center">Bulletin Board</h2>
+				<div><% @threads.each do |b| %>
+					<h5> <a href='https://mail.google.com/mail/u/0/#search/vyu-all%40vyutv.com/<%= b.thread_id %>'><%= b.subject['value'] %></a> </h5>
+					<% b.message_snippets['messages'].each do |m| %>
+						<p> -- <%= m['snippet'] %>...</p>
+					<% end %>
 				<% end %>
-			<% end %>
+				</div>
+			  </div>
 			</div>
-			</div>
+<!-- 			  <h2 class="text-center">Toolbox</h2>
+				<div ng-repeat="tool in tools | filter: searchTerm">
+				  	<div class= "col-md-3">
+				  		<img src="{{profile.profile_picture}}" height= '150px'></img>
+				  	</div>
+				  	<div class="col-md-12 h4">
+				  		<a href="{{tool.link}}">{{tool.name}}</a>
+				  		</div>
+			  	</div> -->
+		  	</div>
+		  	<div class="clearfix"></div>
 		</div>
 	</div>
 

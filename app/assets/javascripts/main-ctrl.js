@@ -33,19 +33,24 @@ app.controller('Main-Ctrl', [ '$rootScope', '$scope', '$timeout', '$http', 'City
   		$scope.london_hrs = parseInt($scope.london_now.split(":")[0]);
   		$scope.la_hrs = parseInt($scope.la_now.split(":")[0]);
 
-  		var dubai_unformatted = $scope.citytimezones[0].time.split(" ")[0].split("-");
-  		dubai_unformatted.shift();
-  		var amman_unformatted = $scope.citytimezones[1].time.split(" ")[0].split("-");
-  		amman_unformatted.shift();
-  		var london_unformatted = $scope.citytimezones[2].time.split(" ")[0].split("-");
-  		london_unformatted.shift();
-  		var la_unformatted = $scope.citytimezones[3].time.split(" ")[0].split("-");
-  		la_unformatted.shift();
+  		// var dubai_unformatted = $scope.citytimezones[0].time.split(" ")[0].split("-");
+  		// dubai_unformatted.shift();
+  		// var amman_unformatted = $scope.citytimezones[1].time.split(" ")[0].split("-");
+  		// amman_unformatted.shift();
+  		// var london_unformatted = $scope.citytimezones[2].time.split(" ")[0].split("-");
+  		// london_unformatted.shift();
+  		// var la_unformatted = $scope.citytimezones[3].time.split(" ")[0].split("-");
+  		// la_unformatted.shift();
 
-  		$scope.dubai_date = dubai_unformatted.join('/');
-  		$scope.amman_date = amman_unformatted.join('/');
-  		$scope.london_date = london_unformatted.join('/');
-  		$scope.la_date = la_unformatted.join('/');
+  		// $scope.dubai_date = dubai_unformatted.join('/');
+  		// $scope.amman_date = amman_unformatted.join('/');
+  		// $scope.london_date = london_unformatted.join('/');
+  		// $scope.la_date = la_unformatted.join('/');
+
+  		$scope.dubai_day = dubai_unformatted.join('/');
+  		$scope.amman_day = amman_unformatted.join('/');
+  		$scope.london_day = london_unformatted.join('/');
+  		$scope.la_day = la_unformatted.join('/');
 
   	};
 
