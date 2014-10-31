@@ -3,7 +3,7 @@ require 'tzinfo'
 class Citytimezone
   include Mongoid::Document
   field :city, type: String
-  field :time, type: Date
+  field :time, type: DateTime
 
   def self.retrieve_times
   	@dubai = TZInfo::Timezone.get("Asia/Dubai")
@@ -25,6 +25,11 @@ class Citytimezone
 	@london_local = @london.utc_to_local(Time.now.utc)
 	@london_timezone = Citytimezone.where(city: 'London').first
 	@london_timezone.update_attribute(:time, @london_local)
+
+	@cairo = TZInfo::Timezone.get("Africa/Cairo")
+	@cairo_local = @cairo.utc_to_local(Time.now.utc)
+	@cairo_timezone = Citytimezone.where(city: 'Cairo').first
+	@cairo_timezone.update_attribute(:time, @cairo_local)
 
   end
 end
